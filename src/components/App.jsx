@@ -17,6 +17,8 @@ var App = () => {
   //state to track videos in the video list
   const [videoList, setVideoList] = useState(testVideoData);
 
+  //create a function to handle video entry title
+
   const getVideoList = (videos) => {
     setVideoList(videos);
     //addVideoToList([...videos, newVideo]) //videoList is the search results list not a playlist
@@ -36,10 +38,10 @@ var App = () => {
       </nav>
       <div className="row">
         <div className="col-md-7">
-          <div><h5><em>videoPlayer</em><VideoPlayer video={currentVideo}/></h5></div>
+          <VideoPlayer video={currentVideo}/>
         </div>
         <div className="col-md-5">
-          <div><h5><em>videoList</em><VideoList videos={testVideoData} getCurrentVideo={getCurrentVideo}/></h5></div>
+          <VideoList videos={testVideoData} getCurrentVideo={getCurrentVideo}/>
         </div>
       </div>
     </div>

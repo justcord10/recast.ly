@@ -1,16 +1,16 @@
 var VideoListEntry = ({video, getCurrentVideo}) => {
-  console.log(video.thumbnails.default.url);
+  // console.log(video.thumbnails.default.url);
   //event Listener logic
-  const selectCurrentVideo = (video) => {
-    getCurrentVideo(video);
-  };
+  // const selectCurrentVideo = (video) => {
+  //   getCurrentVideo(video);
+  // };
 
   return (
     <div className="video-list-entry media">
       <div className="media-left media-middle">
         <img
           className="media-object"
-          src={video.thumbnails.default.url}
+          src={video.snippet.thumbnails.default.url}
           alt=""
           onError={(e) => {
             e.target.src = 'https://coursereport-s3-production.global.ssl.fastly.net/uploads/school/logo/4/original/logo-graybg-02.png'; // Set the URL of a fallback image
@@ -18,8 +18,8 @@ var VideoListEntry = ({video, getCurrentVideo}) => {
         />
       </div>
       <div className="media-body">
-        <div className="video-list-entry-title" onClick={() => selectCurrentVideo(video)} >{video.title}</div>
-        <div className="video-list-entry-detail">{video.description}</div>
+        <div className="video-list-entry-title" onClick={() => getCurrentVideo(video)} >{video.snippet.title}</div>
+        <div className="video-list-entry-detail">{video.snippet.description}</div>
       </div>
     </div> );
 };

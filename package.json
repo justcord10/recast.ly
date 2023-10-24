@@ -8,6 +8,7 @@
   "scripts": {
     "start": "live-server --open=./SpecRunner.html --port=8081 & npx babel . --out-dir=compiled --presets=@babel/preset-react --ignore=node_modules,compiled --source-maps=inline --watch"
   },
+  "ignore": "config.js",
   "dependencies": {
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1 ",

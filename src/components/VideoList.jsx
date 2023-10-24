@@ -4,8 +4,8 @@ import VideoListEntry from './VideoListEntry.js';
 var VideoList = ({videos, getCurrentVideo}) => {
   return (
     <div className="video-list">
-      {videos.map((video, index) =>(
-        <VideoListEntry key={index} video={video.snippet} getCurrentVideo={getCurrentVideo}/>
+      {videos.map((video) =>(
+        <VideoListEntry key={video.id.videoId} video={video} getCurrentVideo={getCurrentVideo}/>
       ))}
     </div>
   );
