@@ -1,15 +1,29 @@
-var VideoListEntry = () => (
-  <div className="video-list-entry media">
-    <div className="media-left media-middle">
-      <img className="media-object" src="https://i.ytimg.com/vi/1w8Z0UOXVaY/default.jpg" alt="" />
-    </div>
-    <div className="media-body">
-      <div className="video-list-entry-title">Video Title</div>
-      <div className="video-list-entry-detail">Video Description</div>
-    </div>
-  </div>
-);
+var VideoListEntry = ({video, getCurrentVideo}) => {
+  console.log(video.thumbnails.default.url);
+  //event Listener logic
+  const selectCurrentVideo = (video) => {
+    getCurrentVideo(video);
+  };
 
+  return (
+    <div className="video-list-entry media">
+      <div className="media-left media-middle">
+        <img
+          className="media-object"
+          src={video.thumbnails.default.url}
+          alt=""
+          onError={(e) => {
+            e.target.src = 'https://coursereport-s3-production.global.ssl.fastly.net/uploads/school/logo/4/original/logo-graybg-02.png'; // Set the URL of a fallback image
+          }}
+        />
+      </div>
+      <div className="media-body">
+        <div className="video-list-entry-title" onClick={() => selectCurrentVideo(video)} >{video.title}</div>
+        <div className="video-list-entry-detail">{video.description}</div>
+      </div>
+    </div> );
+};
+/* <img className="media-object" src={video.thumbnails.default.url} alt="" /> */
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
 VideoListEntry.propTypes = {
@@ -18,4 +32,6 @@ VideoListEntry.propTypes = {
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
+
+
 export default VideoListEntry;
