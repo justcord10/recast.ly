@@ -1,10 +1,4 @@
 var VideoListEntry = ({video, getCurrentVideo}) => {
-  // console.log(video.thumbnails.default.url);
-  //event Listener logic
-  // const selectCurrentVideo = (video) => {
-  //   getCurrentVideo(video);
-  // };
-
   return (
     <div className="video-list-entry media">
       <div className="media-left media-middle">

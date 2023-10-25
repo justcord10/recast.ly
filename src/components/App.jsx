@@ -1,11 +1,12 @@
 import Search from './Search.js';
 import VideoPlayer from './VideoPlayer.js';
 import VideoList from './VideoList.js';
+import searchYouTube from '../lib/searchYouTube.js';
 
 //import exampleVideoData
 import exampleVideoData from '../data/exampleVideoData.js';
-const testVideoData = exampleVideoData.slice();
-console.log(testVideoData);
+const videoData = [];
+
 
 const {useState, useEffect} = React;
 
@@ -13,11 +14,18 @@ var App = () => {
 
   //States go here
   //changing the video player video to a new video(from list or from search)
-  const [currentVideo, setCurrentVideo] = useState(testVideoData[0]);
+  const [currentVideo, setCurrentVideo] = useState(videoData);
   //state to track videos in the video list
-  const [videoList, setVideoList] = useState(testVideoData);
+  const [videoList, setVideoList] = useState(videoData);
 
-  //create a function to handle video entry title
+  useEffect(() => {
+    const placeHolderQuery = 'cats';
+    searchYouTube(placeHolderQuery, (videos) => {
+      setCurrentVideo(videos[0]);
+      setVideoList(videos);
+    });
+  }, []);
+  //videoData, Search, VideoPlayer, VideoList, currentVideo, videoList
 
   const getVideoList = (videos) => {
     setVideoList(videos);
@@ -33,7 +41,7 @@ var App = () => {
     <div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><h5><em>search</em><Search videos={testVideoData} getVideoList={getVideoList}/></h5></div>
+          <div><h5><em>search</em><Search videos={videoList} getVideoList={getVideoList}/></h5></div>
         </div>
       </nav>
       <div className="row">
@@ -41,7 +49,7 @@ var App = () => {
           <VideoPlayer video={currentVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={testVideoData} getCurrentVideo={getCurrentVideo}/>
+          <VideoList videos={videoList} getCurrentVideo={getCurrentVideo}/>
         </div>
       </div>
     </div>
