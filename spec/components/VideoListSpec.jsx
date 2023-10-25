@@ -20,7 +20,6 @@ describe('VideoList', function() {
     );
 
     var videoList = shallowRenderer.getRenderOutput();
-    console.log('props.children   ',videoList.props.children);
     expect(videoList.props.children).to.have.length(1);
     videoList.props.children.forEach(child => expect(child.type).to.equal(VideoListEntry));
   });

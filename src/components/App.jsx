@@ -5,7 +5,7 @@ import searchYouTube from '../lib/searchYouTube.js';
 
 //import exampleVideoData
 import exampleVideoData from '../data/exampleVideoData.js';
-const videoData = [];
+const videoData = exampleVideoData;
 
 
 const {useState, useEffect} = React;
@@ -14,21 +14,28 @@ var App = () => {
 
   //States go here
   //changing the video player video to a new video(from list or from search)
-  const [currentVideo, setCurrentVideo] = useState(videoData);
+  const [currentVideo, setCurrentVideo] = useState(videoData[0]);
   //state to track videos in the video list
   const [videoList, setVideoList] = useState(videoData);
 
-  useEffect(() => {
-    const placeHolderQuery = 'cats';
-    searchYouTube(placeHolderQuery, (videos) => {
-      setCurrentVideo(videos[0]);
-      setVideoList(videos);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const placeHolderQuery = 'cats';
+  //   searchYouTube(placeHolderQuery, (videos) => {
+  //     setCurrentVideo(videos[0]);
+  //     setVideoList(videos);
+  //   });
+  // }, []);
   //videoData, Search, VideoPlayer, VideoList, currentVideo, videoList
 
-  const getVideoList = (videos) => {
-    setVideoList(videos);
+  const getVideoList = (e) => {
+    let query = e.target.value;
+    console.log(query);
+    timeout = setTimeout(() => {
+      searchYouTube(query, (videos => {
+        setVideoList(videos);
+      }));
+    });
+    // setVideoList(videos);
     //addVideoToList([...videos, newVideo]) //videoList is the search results list not a playlist
   };
 
@@ -41,7 +48,7 @@ var App = () => {
     <div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><h5><em>search</em><Search videos={videoList} getVideoList={getVideoList}/></h5></div>
+          <div><Search getVideoList={(e) => getVideoList(e)}/></div>
         </div>
       </nav>
       <div className="row">
